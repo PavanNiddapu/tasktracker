@@ -15,6 +15,8 @@ repositories {
 	mavenCentral()
 }
 
+val kotestVersion = "5.2.3"
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -24,6 +26,23 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
+	// Use JUnit Jupiter API for testing.
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
+
+	// Use JUnit Jupiter Engine for testing.
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
+
+	// This dependency is used by the application.
+	implementation("com.google.guava:guava:29.0-jre")
+
+	// https://mvnrepository.com/artifact/io.projectreactor/reactor-core
+	implementation("io.projectreactor:reactor-core")
+
+	testImplementation("io.mockk:mockk:1.10.6")
+	testImplementation("io.mockk:mockk:1.10.0")
+	testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
+	testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
+
 }
 
 tasks.withType<KotlinCompile> {
