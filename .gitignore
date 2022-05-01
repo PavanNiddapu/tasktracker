@@ -52,3 +52,6 @@ yarn-debug.log*
 yarn-error.log*
 
 out/
+
+
+/src/main/resources/ui/
