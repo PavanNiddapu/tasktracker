@@ -34,15 +34,11 @@ class TaskControllerTest(
                 name = "name",
                 description = "SomeValue",
                 createdDate = LocalDateTime.now(),
-                startDate = null,
-                finishDate = null
             ), Task(
                 id = 2,
                 name = "name",
                 description = "SomeValue",
                 createdDate = LocalDateTime.now(),
-                startDate = null,
-                finishDate = null
             )
         )
 
@@ -70,9 +66,7 @@ class TaskControllerTest(
                 id = 1,
                 name = "task name",
                 description = "task description",
-                createdDate = LocalDateTime.now(),
-                startDate = null,
-                finishDate = null
+                createdDate = LocalDateTime.now()
             )
         )
         val taskResponse = webTestClient.get()
@@ -98,8 +92,6 @@ class TaskControllerTest(
                     name = "task name",
                     description = "task description",
                     createdDate = LocalDateTime.now(),
-                    startDate = null,
-                    finishDate = null
                 )
             )
 
@@ -116,8 +108,6 @@ class TaskControllerTest(
                 taskResponse.name shouldBe "task name"
                 taskResponse.description shouldBe "task description"
                 taskResponse.createdDate shouldBe now
-                taskResponse.startDate shouldBe null
-                taskResponse.finishDate shouldBe null
             }
         }
     }

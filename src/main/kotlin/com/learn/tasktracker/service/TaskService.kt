@@ -15,15 +15,11 @@ class TaskService {
                 name = "name",
                 description = "SomeValue",
                 createdDate = LocalDateTime.now(),
-                startDate = null,
-                finishDate = null
             ), Task(
                 id = 2,
                 name = "name",
                 description = "SomeValue",
                 createdDate = LocalDateTime.now(),
-                startDate = null,
-                finishDate = null
             )
         )
     }
@@ -35,8 +31,6 @@ class TaskService {
                 name = "task name",
                 description = "task description",
                 createdDate = LocalDateTime.now(),
-                startDate = null,
-                finishDate = null
             )
         )
     }
