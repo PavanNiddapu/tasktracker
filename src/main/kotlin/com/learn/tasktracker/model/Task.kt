@@ -1,4 +1,4 @@
-package com.pavan.tasktracker.model
+package com.learn.tasktracker.model
 
 import java.time.LocalDateTime
 

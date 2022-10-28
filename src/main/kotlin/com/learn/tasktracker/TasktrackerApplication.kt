@@ -1,4 +1,4 @@
-package com.pavan.tasktracker
+package com.learn.tasktracker
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

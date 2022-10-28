@@ -1,7 +1,7 @@
-package com.pavan.tasktracker.controller
+package com.learn.tasktracker.controller
 
-import com.pavan.tasktracker.model.Task
-import com.pavan.tasktracker.service.TaskService
+import com.learn.tasktracker.model.Task
+import com.learn.tasktracker.service.TaskService
 import io.kotest.assertions.assertSoftly
 import io.kotest.extensions.time.withConstantNow
 import io.kotest.matchers.shouldBe
