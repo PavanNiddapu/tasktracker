@@ -2,8 +2,6 @@ package com.learn.tasktracker.controller
 
 import com.learn.tasktracker.model.Task
 import com.learn.tasktracker.service.TaskService
-import io.kotest.assertions.assertSoftly
-import io.kotest.extensions.time.withConstantNow
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
@@ -15,8 +13,7 @@ import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 import org.springframework.test.web.reactive.server.WebTestClient
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
+import org.springframework.web.reactive.function.BodyInserters
 import java.time.LocalDateTime
 
 @WebFluxTest(TaskController::class)
@@ -28,7 +25,7 @@ class TaskControllerTest(
 
     @BeforeEach
     fun setUp() {
-        every { taskService.getTasks() } returns Flux.just(
+        every { taskService.fetchAllTasks() } returns listOf(
             Task(
                 id = 1,
                 name = "name",
@@ -45,11 +42,9 @@ class TaskControllerTest(
     }
 
     @Test
-    fun `should return count of tasks`() {
-
-
+    fun `should return all tasks`() {
         val response = webTestClient.get()
-            .uri("/api/tasks")
+            .uri("/api/task")
             .exchange()
             .expectStatus().isOk
             .expectBodyList(Task::class.java)
@@ -60,56 +55,23 @@ class TaskControllerTest(
     }
 
     @Test
-    fun `should return task by task id 1`() {
-        every { taskService.getTaskById(any()) } returns Mono.just(
-            Task(
-                id = 1,
-                name = "task name",
-                description = "task description",
-                createdDate = LocalDateTime.now()
+    fun `should be able to create a task`() {
+        val task = Task(id = 0, name = "", description = "")
+        every { taskService.createTask(any()) } returns task
+        val response = webTestClient.post()
+            .uri("/api/task")
+            .body(
+                BodyInserters.fromFormData("id", "0")
+                    .with("name", "")
+                    .with("description", "")
             )
-        )
-        val taskResponse = webTestClient.get()
-            .uri("/api/tasks/1")
             .exchange()
-            .expectStatus().isOk
+            .expectStatus().isCreated
             .expectBody(Task::class.java)
             .returnResult()
             .responseBody!!
 
-        assertSoftly {
-            taskResponse.id shouldBe 1
-        }
-    }
-
-    @Test
-    fun `Task should contain id,name,description,createdDate,startDate,finishDate`() {
-        val now = LocalDateTime.now()
-        withConstantNow(now) {
-            every { taskService.getTaskById(any()) } returns Mono.just(
-                Task(
-                    id = 1,
-                    name = "task name",
-                    description = "task description",
-                    createdDate = LocalDateTime.now(),
-                )
-            )
-
-            val taskResponse = webTestClient.get()
-                .uri("/api/tasks/1")
-                .exchange()
-                .expectStatus().isOk
-                .expectBody(Task::class.java)
-                .returnResult()
-                .responseBody!!
-
-            assertSoftly {
-                taskResponse.id shouldBe 1
-                taskResponse.name shouldBe "task name"
-                taskResponse.description shouldBe "task description"
-                taskResponse.createdDate shouldBe now
-            }
-        }
+        response shouldBe task
     }
 
     @TestConfiguration

@@ -62,7 +62,7 @@ class TaskTest {
         withConstantNow(someFixedDts.plusHours(3)) {
             task.stopActivity()
         }
-        task.getTotalHoursWorked() shouldBe 2
+        task.calculateTotalHoursWorked() shouldBe 2
     }
 
     private fun sampleTask() = Task(

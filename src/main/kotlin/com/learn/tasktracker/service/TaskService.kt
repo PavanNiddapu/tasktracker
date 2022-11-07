@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class TaskService(
-    val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository
 ) {
     fun fetchAllTasks(): List<Task> {
         return taskRepository.findAll() as List<Task>
