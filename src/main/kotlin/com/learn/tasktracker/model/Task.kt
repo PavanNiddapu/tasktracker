@@ -1,8 +1,12 @@
 package com.learn.tasktracker.model
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 
+@Document(collection = "tasks")
 data class Task(
+    @Id
     val id: Long,
     val name: String,
     val description: String,

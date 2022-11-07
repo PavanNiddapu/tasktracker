@@ -1,39 +1,20 @@
 package com.learn.tasktracker.service
 
 import com.learn.tasktracker.model.Task
+import com.learn.tasktracker.repository.TaskRepository
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
-import java.time.LocalDateTime
 
 @Service
-class TaskService {
-    fun getTasks(): Flux<Task> {
-        return Flux.just(
-            Task(
-                id = 1,
-                name = "name",
-                description = "SomeValue",
-                createdDate = LocalDateTime.now(),
-            ), Task(
-                id = 2,
-                name = "name",
-                description = "SomeValue",
-                createdDate = LocalDateTime.now(),
-            )
-        )
+class TaskService(
+    val taskRepository: TaskRepository
+) {
+    fun fetchAllTasks(): List<Task> {
+        return taskRepository.findAll() as List<Task>
     }
 
-    fun getTaskById(id: Long): Mono<Task> {
-        return Mono.just(
-            Task(
-                id = id,
-                name = "task name",
-                description = "task description",
-                createdDate = LocalDateTime.now(),
-            )
-        )
-    }
 
+    fun createTask(task: Task): Task {
+        return taskRepository.save(task)
+    }
 
 }

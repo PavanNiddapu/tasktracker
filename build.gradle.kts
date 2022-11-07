@@ -24,6 +24,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation("org.springframework.data:spring-data-mongodb:3.4.5")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	// Use JUnit Jupiter API for testing.
@@ -42,6 +43,7 @@ dependencies {
 	testImplementation("io.mockk:mockk:1.10.0")
 	testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
 	testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
+
 
 }
 
