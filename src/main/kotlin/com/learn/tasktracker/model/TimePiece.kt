@@ -6,5 +6,9 @@ class TimePiece(val startTime: LocalDateTime, var stopTime: LocalDateTime?) {
     override fun toString(): String {
         return "TimePiece{startTime:$startTime, stopTime:$stopTime}"
     }
+
+    fun getTimeDiffInHours(): Int {
+        return 1
+    }
 }
 

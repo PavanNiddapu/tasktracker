@@ -46,6 +46,25 @@ class TaskTest {
         }
     }
 
+    @Test
+    fun `calculate hours worked on the task`() {
+        val task = sampleTask()
+        val someFixedDts = LocalDateTime.of(2022, 11, 11, 11, 11, 11)
+        withConstantNow(someFixedDts) {
+            task.startActivity()
+        }
+        withConstantNow(someFixedDts.plusHours(1)) {
+            task.stopActivity()
+        }
+        withConstantNow(someFixedDts.plusHours(2)) {
+            task.startActivity()
+        }
+        withConstantNow(someFixedDts.plusHours(3)) {
+            task.stopActivity()
+        }
+        task.getTotalHoursWorked() shouldBe 2
+    }
+
     private fun sampleTask() = Task(
         id = 1,
         name = "task1",

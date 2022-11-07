@@ -6,9 +6,7 @@ data class Task(
     val id: Long,
     val name: String,
     val description: String,
-    val createdDate: LocalDateTime = LocalDateTime.now(),
-    val taskStartDts: LocalDateTime = LocalDateTime.now(),
-    val taskEndDts: LocalDateTime = LocalDateTime.now().minusHours(1),
+    val createdDate: LocalDateTime = LocalDateTime.now()
 ) {
     private var timeLine: ArrayList<TimePiece> = arrayListOf()
 
@@ -30,4 +28,10 @@ data class Task(
     private fun isLastActivityNull() = timeLine.size > 0 && timeLine.last().stopTime == null
 
     fun timelineSize() = timeLine.size
+
+    fun getTotalHoursWorked(): Int {
+        return timeLine.map { timePiece -> timePiece.getTimeDiffInHours() }
+            .reduce { sum, hours -> sum + hours }
+
+    }
 }
