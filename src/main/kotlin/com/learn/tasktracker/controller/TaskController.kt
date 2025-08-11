@@ -3,12 +3,14 @@ package com.learn.tasktracker.controller
 import com.learn.tasktracker.model.Task
 import com.learn.tasktracker.service.TaskService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
+@Profile("!demo")
 class TaskController(
     @Autowired val taskService: TaskService
 ) {
