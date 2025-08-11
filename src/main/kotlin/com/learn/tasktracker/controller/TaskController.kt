@@ -18,17 +18,17 @@ class TaskController(
     }
 
     @PostMapping("/task")
-    fun createTask(task: Task): ResponseEntity<Task> {
+    fun createTask(@RequestBody task: Task): ResponseEntity<Task> {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.createTask(task))
     }
 
     @GetMapping("/task/start/{id}")
-    fun startTask(@PathVariable id: Int): TaskActionResponse {
+    fun startTask(@PathVariable id: Long): TaskActionResponse {
         return if (taskService.startTask(id)) TaskActionResponse("success") else TaskActionResponse("failed")
     }
 
     @GetMapping("/task/stop/{id}")
-    fun stopTask(@PathVariable id: Int): TaskActionResponse {
+    fun stopTask(@PathVariable id: Long): TaskActionResponse {
         return if (taskService.stopTask(id)) TaskActionResponse("success") else TaskActionResponse("failed")
     }
 

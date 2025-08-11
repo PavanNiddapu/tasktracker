@@ -34,8 +34,11 @@ data class Task(
     fun timelineSize() = timeLine.size
 
     fun calculateTotalHoursWorked(): Int {
-        return timeLine.map { timePiece -> timePiece.getTimeDiffInHours() }
-            .reduce { sum, hours -> sum + hours }
-
+        return if (timeLine.isEmpty()) {
+            0
+        } else {
+            timeLine.map { timePiece -> timePiece.getTimeDiffInHours() }
+                .reduce { sum, hours -> sum + hours }
+        }
     }
 }

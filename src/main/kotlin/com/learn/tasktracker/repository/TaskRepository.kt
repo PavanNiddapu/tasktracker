@@ -5,4 +5,4 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TaskRepository : CrudRepository<Task, String>
+interface TaskRepository : CrudRepository<Task, Long>
