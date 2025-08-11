@@ -56,15 +56,12 @@ class TaskControllerTest(
 
     @Test
     fun `should be able to create a task`() {
-        val task = Task(id = 0, name = "", description = "")
+        val task = Task(id = 0, name = "test", description = "test description")
         every { taskService.createTask(any()) } returns task
         val response = webTestClient.post()
             .uri("/api/task")
-            .body(
-                BodyInserters.fromFormData("id", "0")
-                    .with("name", "")
-                    .with("description", "")
-            )
+            .header("Content-Type", "application/json")
+            .body(BodyInserters.fromValue(task))
             .exchange()
             .expectStatus().isCreated
             .expectBody(Task::class.java)
